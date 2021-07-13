@@ -22,6 +22,13 @@ $tsml_meeting_attendance_options = array(
 	'inactive' => 'Temporarily Inactive',
 );
 
+// Define meeting finder options
+$tsml_meeting_finder_options = array(
+	'legacy' => 'Plugin (legecy)',
+	'beta' => 'TSML UI (beta)',
+	'stable' => 'TSML UI (stable)',
+);
+
 //load the set of columns that should be present in the list (not sure why this shouldn't go after plugins_loaded below)
 $tsml_columns = array(
 	'time' => 'Time',
@@ -102,6 +109,13 @@ $tsml_google_maps_key = get_option('tsml_google_maps_key');
 
 //load the geocoding method
 $tsml_geocoding_method = get_option('tsml_geocoding_method', 'legacy');
+
+//load the meeting finder choice, must be legacy if we have a google maps key
+if (empty($tsml_google_maps_key)) {
+	$tsml_meeting_finder = get_option('tsml_meeting_finder', 'legacy');
+} else {
+	$tsml_meeting_finder = 'legacy';
+}
 
 /*
 unfortunately the google geocoding API is not always perfect. used by tsml_import() and admin.js

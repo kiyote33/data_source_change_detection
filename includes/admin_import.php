@@ -4,7 +4,7 @@
 function tmsl_import_page() {
 	global $wpdb, $tsml_data_sources, $tsml_programs, $tsml_program, $tsml_nonce, $tsml_days, $tsml_feedback_addresses, 
 	$tsml_notification_addresses, $tsml_distance_units, $tsml_sharing, $tsml_sharing_keys, $tsml_contact_display,
-	$tsml_google_maps_key, $tsml_mapbox_key, $tsml_geocoding_method, $tsml_slug;
+	$tsml_google_maps_key, $tsml_mapbox_key, $tsml_geocoding_method, $tsml_slug, $tsml_meeting_finder_options, $tsml_meeting_finder;
 
 	$error = false;
 	
@@ -903,6 +903,18 @@ function tmsl_import_page() {
 							<?php if (!empty($tsml_google_maps_key)) {?>
 								<p>If you select "Use my Google API Key", then you <strong>must</strong> go into the Google Console and enable the geocode API for your key</p>
 							<?php }?>
+
+							<details>
+								<summary><strong><?php _e('Meeting Finder Option', '12-step-meeting-list') ?></strong></summary>
+								<p><?php _e('Code4Recovery is also working on a new react based meeting finder.', '12-step-meeting-list') ?></p>
+							</details>
+							<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+								<?php wp_nonce_field($tsml_nonce, 'tsml_nonce', false) ?>
+								<select name="tsml_meeting_finder" onchange="this.form.submit()">
+									<?php foreach ($tsml_meeting_finder_options as $option_key=>$option_value) { ?>
+										<option value="<?php echo $option_key; ?>" <?php selected($tsml_meeting_finder, $option_key) ?>><?php _e($option_value, '12-step-meeting-list'); ?></option>
+									<?php }?>
+								</select>
 						</div>
 					</div>
 				</div>
