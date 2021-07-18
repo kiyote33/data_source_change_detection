@@ -417,6 +417,13 @@ function tmsl_import_page() {
 		tsml_alert(__('Geocoding method updated.', '12-step-meeting-list'));
 	}
 
+	//change geocoding method
+	if (!empty($_POST['tsml_meeting_finder']) && isset($_POST['tsml_nonce']) && wp_verify_nonce($_POST['tsml_nonce'], $tsml_nonce)) {
+		$tsml_meeting_finder = sanitize_text_field($_POST['tsml_meeting_finder']);
+		update_option('tsml_meeting_finder', $tsml_meeting_finder);
+		tsml_alert(__('Meeting Finder Selection updated.', '12-step-meeting-list'));
+	}
+
 	/*debugging
 	delete_option('tsml_data_sources');
 	tsml_delete('everything');
@@ -905,7 +912,7 @@ function tmsl_import_page() {
 							<?php }?>
 
 							<details>
-								<summary><strong><?php _e('Meeting Finder Option', '12-step-meeting-list') ?></strong></summary>
+								<summary><strong><?php _e('Meeting Finder Selection', '12-step-meeting-list') ?></strong></summary>
 								<p><?php _e('Code4Recovery is also working on a new react based meeting finder.', '12-step-meeting-list') ?></p>
 							</details>
 							<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
