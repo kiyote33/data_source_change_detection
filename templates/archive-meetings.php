@@ -1,8 +1,10 @@
 <?php
 
+global $tsml_meeting_finder;
 //get assets for page
 tsml_assets();
 
+if ($tsml_meeting_finder == 'legacy') {
 //define search dropdown options
 $modes = array(
     'search' => array('title' => __('Search', '12-step-meeting-list'), 'icon' => 'glyphicon glyphicon-search'),
@@ -661,3 +663,29 @@ break;
 
 <?php
 get_footer();
+
+}
+else {
+    // Use the TSML-UI Meeting Finder
+    get_header();
+    echo ('<div id="tsml">');
+
+    // Handle the Top Widget
+	if (is_active_sidebar('tsml_meetings_top')) {
+		echo ('<div class="widgets meetings-widgets meetings-widgets-top" role="complementary">');
+		dynamic_sidebar('tsml_meetings_top');
+		echo ('</div>');
+	}
+
+    // Place the TSML-UI code on the page
+    echo(tsml_ui());
+
+    // Handle the Bottom Widget
+	if (is_active_sidebar('tsml_meetings_bottom')) {
+		echo ('<div class="widgets meetings-widgets meetings-widgets-bottom" role="complementary">');
+		dynamic_sidebar('tsml_meetings_bottom');
+		echo ('</div>');
+	}
+    echo ('</div>');
+    get_footer();
+}
