@@ -97,6 +97,12 @@ $tsml_distance_units = get_option('tsml_distance_units', 'mi');
 //load email addresses to send user feedback about meetings
 $tsml_feedback_addresses = get_option('tsml_feedback_addresses', array());
 
+//load whether feedback method to use is legacy or enhanced (defaults to enhanced)
+$tsml_feedback_method = get_option('tsml_feedback_method', 'legacy');
+
+//load whether Change Detection to be enabled or disabled (defaults to disabled)
+$tsml_change_detect = get_option('tsml_change_detect', 'disabled');
+
 //load the API key user saved, if any
 $tsml_google_maps_key = get_option('tsml_google_maps_key');
 
